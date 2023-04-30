@@ -5,13 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Message extends Model
 {
     public $timestamps = false;
-    protected $fillable = [
-        'full_name',
-        'username',
-        'password',
-        'membership-status'
-    ];
+    protected $fillable = ['title', 'text', 'timestamp', 'user_id'];
 }
