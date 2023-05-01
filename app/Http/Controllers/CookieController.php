@@ -8,13 +8,19 @@ use Illuminate\Http\Response;
 class CookieController extends Controller
 {
     public function setCookie(Request $request) {
-    $minutes = 1;
-    $response = new Response('Hello World');
+        $name = (string) $request->query('name');
     
-    $response->withCookie(cookie('name', 'fariz', $minutes));
-
-    return $response;
+        $minutes = 300;
+        $response = new Response('Hello World');
+        $token = "helloeijehdfddbdbddhdd";
+        $response = $response->withCookie(cookie('name', $token, $minutes));
+        return $response;
     }
+    
+    
+    
+    
+    
 
     public function getCookie(Request $request) {
         $value = $request->cookie('name');

@@ -22,7 +22,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     Route::get('messages', 'MessageController@getMessages');
     Route::post('messages', 'MessageController@addMessage');
     Route::post('auth/register', 'UserController@addUser');
-    Route::post('auth/login', 'UserController@login');
+    Route::get('auth/login', 'UserController@login');
     Route::get('user/update', 'UserController@updateUser');
 
 Route::get('/cookie/set', 'CookieController@setCookie');

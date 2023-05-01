@@ -23,29 +23,18 @@ class UserController extends Controller
     }
 
     public function login(Request $request) {
-        $user = User::where('username', $request->username)->first();
+        $user = User::where('username',  $request->query('username'))->first();
         if(is_null($user)) {
             return response()->json(['message' => 'Account does not exist'], 401);
         }
- if (!password_verify($request->password, $user->password))
+ if (!password_verify( $request->query('password'), $user->password))
       return response()->json(['message' => 'Wrong password'], 401);
 
-    //$token = JWTToken::generateToken($user);
-
-    /*
-
-    setcookie('access_token', $token, [
-        'domain' => '127.0.0.1',
-        'path' => '/',
-        'expires' => time() + 34473600000,
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Strict'
-    ]);
-
-    */
-    return response(['full_name' => $user->full_name, 'id' => $user->id], 201);
-
+    $token = JWTToken::generateToken($user);
+    $minutes = 3000;
+    $response = new Response('Successful');
+    $response->withCookie(cookie('access_token', $token, $minutes));
+    return $response;
     }
 
     public function updateUser() {
