@@ -47,7 +47,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Migrate tables to database
-        run: php artisan migrate -y
+        run: php artisan migrate --force
 
       - name: Run Tests
         run: php artisan test
