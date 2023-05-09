@@ -8,7 +8,7 @@ jobs:
   test:
     env:
       DB_CONNECTION: mysql
-      DB_HOST: localhost
+      DB_HOST: mysql
       DB_PORT: 3306
       DB_DATABASE: members-only_db
       DB_USERNAME: root
@@ -28,7 +28,8 @@ jobs:
           MYSQL_USER: root
           MYSQL_PASSWORD: root
         ports:
-          - 3306:3306
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout Code From the Repository
