@@ -29,7 +29,7 @@ jobs:
         options: >-
           --health-cmd mysqladmin ping
           --health-interval 10s
-          --health-timeout 5s
+          --health-timeout 30s
           --health-retries 5
         ports:
           - 3306:3306
@@ -48,6 +48,9 @@ jobs:
 
       - name: Generate Application Key
         run: php artisan key:generate
+
+      - name: Wait for MySQL service to start
+        run: sleep 30s
 
       - name: Run Tests
         run: php artisan test
