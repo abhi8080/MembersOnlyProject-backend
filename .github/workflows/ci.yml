@@ -43,6 +43,9 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install
 
+      - name: Run MySQL
+        run: systemctl start mysql
+
       - name: See if MySQL is running
         run: systemctl status mysql
 
