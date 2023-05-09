@@ -1,0 +1,53 @@
+name: Laravel Continuous Integration
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  test:
+    env:
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_DATABASE: members-only_db
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      JWT_SECRET: THISISATESTSECRET
+      TEST_BEARER_TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTcsInVzZXJuYW1lIjoiYWRtaW5AZ21haWwuY29tIiwibWVtYmVyc2hpcC1zdGF0dXMiOiJpbmFjdGl2ZSJ9.HXC-RkfS-NcVXTqUhBi-p2D6dadeWyqZgXcjpjwgUxs
+
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: members-only_db
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+        options: >-
+          --health-cmd mysqladmin ping
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 3306:3306
+
+    steps:
+      - name: Checkout Code From the Repository
+        uses: actions/checkout@v2
+
+      - name: Install PHP and Dependencies
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: mbstring, pdo_mysql
+      - name: Install Composer Dependencies
+        run: composer install
+
+      - name: Generate Application Key
+        run: php artisan key:generate
+
+      - name: Run Tests
+        run: php artisan test
