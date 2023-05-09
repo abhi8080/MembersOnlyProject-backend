@@ -46,5 +46,8 @@ jobs:
       - name: Generate Application Key
         run: php artisan key:generate
 
+      - name: Migrate tables to database
+        run: php artisan migrate
+
       - name: Run Tests
         run: php artisan test
