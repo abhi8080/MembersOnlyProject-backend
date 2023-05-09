@@ -18,13 +18,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['namespace' => 'App\Http\Controllers'], function() {
-    Route::get('messages', 'MessageController@getMessages');
-    Route::post('messages', 'MessageController@addMessage');
+    Route::group(['namespace' => 'App\Http\Controllers'], function() {
     Route::post('auth/register', 'UserController@addUser');
-    Route::get('auth/login', 'UserController@login');
-    Route::get('user/update', 'UserController@updateUser');
+    Route::post('auth/login', 'UserController@login');
 
-Route::get('/cookie/set', 'CookieController@setCookie');
-Route::get('/cookie/get', 'CookieController@getCookie');
+
+    Route::get('messages', 'MessageController@getMessages')->middleware('App\Http\Middleware\AuthorizeRequestMiddleware');
+    Route::post('messages', 'MessageController@addMessage')->middleware('App\Http\Middleware\AuthorizeRequestMiddleware');
+    Route::delete('messages/{id}', 'MessageController@deleteMessage')->middleware('App\Http\Middleware\AuthorizeRequestMiddleware');
+    Route::put('user/{id}', 'UserController@updateUser')->middleware('App\Http\Middleware\AuthorizeRequestMiddleware');
+    Route::get('user/{id}', 'UserController@getUserAdminStatus')->middleware('App\Http\Middleware\AuthorizeRequestMiddleware');
 });
