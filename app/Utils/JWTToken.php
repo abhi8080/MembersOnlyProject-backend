@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use TheSeer\Tokenizer\Exception;
 
 
@@ -28,6 +29,16 @@ class JWTToken {
         return $jwt;
       
       }
+
+      public static function verifyToken($token) {
+        try {
+          $decoded = JWT::decode($token, new Key(getenv('JWT_SECRET'), 'HS256'));
+          return $decoded;
+        } catch (\Exception $e) {
+          throw new Exception('Bad token');
+        }
+      }
       
 
 }
+
