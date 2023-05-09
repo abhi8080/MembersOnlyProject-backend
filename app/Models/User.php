@@ -12,6 +12,7 @@ class User extends Model
         'full_name',
         'username',
         'password',
-        'membership-status'
+        'membership-status',
+        'is_admin'
     ];
 }
