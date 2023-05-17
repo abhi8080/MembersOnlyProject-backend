@@ -1,6 +1,9 @@
 # Laravel Backend
 
-This is the backend application built with Laravel for your project. It provides the API endpoints and handles data storage and retrieval.
+This is the backend application built with Laravel for the Members Only Application. It provides the API endpoints and handles data storage and retrieval.
+
+## Prerequisites
+PHP and Composer must be installed on the local system. 
 
 ## Installation
 
