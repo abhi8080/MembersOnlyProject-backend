@@ -40,6 +40,7 @@ jobs:
         with:
           php-version: "8.2"
           extensions: mbstring, pdo_mysql
+
       - name: Install Composer Dependencies
         run: composer install
 
