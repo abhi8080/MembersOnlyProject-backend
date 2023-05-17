@@ -1,4 +1,4 @@
-# Laravel Backend
+# MembersOnlyProject-backend
 
 This is the backend application built with Laravel for the Members Only Application. It provides the API endpoints and handles data storage and retrieval.
 
@@ -53,27 +53,35 @@ PHP and Composer must be installed on the local system.
 
 The backend provides the following API endpoints:
 
-- **Endpoint 1**: `/api/messages`
+- **Endpoint 1**: `/api/auth/register`
+
+  - `POST`: Creates a new user.
+
+- **Endpoint 2**: `/api/auth/login`
+
+  - `POST`: Logs in a user.
+
+- **Endpoint 3**: `/api/messages`
 
   - `GET`: Retrieves all messages.
   - `POST`: Creates a new message.
+  - `DELETE`: Deletes a specific message by ID.
 
-- **Endpoint 2**: `/api/messages/{id}`
+- **Endpoint 4**: `/api/messages/{id}`
 
   - `GET`: Retrieves a specific message by ID.
   - `PUT`: Updates a specific message by ID.
-  - `DELETE`: Deletes a specific message by ID.
 
-- **Endpoint 3**: `/api/users`
+- **Endpoint 5**: `/api/user/{id}`
 
-  - `GET`: Retrieves all users.
-  - `POST`: Creates a new user.
-
-- **Endpoint 4**: `/api/users/{id}`
-
-  - `GET`: Retrieves a specific user by ID.
   - `PUT`: Updates a specific user by ID.
-  - `DELETE`: Deletes a specific user by ID.
+  - `GET`: Retrieves a specific user by ID.
+
+- **Endpoint 6**: `/api/user/{id}`
+
+  - `GET`: Retrieves the admin status of a specific user by ID.
+
+
 
 ### Transactions
 
